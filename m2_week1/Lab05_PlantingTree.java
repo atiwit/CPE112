@@ -1,6 +1,31 @@
 package m2_week1;
 import java.util.Scanner;
 
+public class Lab05_PlantingTree {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Tree tree = new Tree(n);
+        for (int i = 0; i < n; i++) {
+            String name = sc.next();
+            int data = sc.nextInt();
+            tree.node[i] = new Node(data, name);
+        }
+        for (int i = 0; i < n - 1; i++) {
+            String pname = sc.next();
+            String cname = sc.next();
+            char direction = sc.next().charAt(0);
+            tree.addEdge(pname, cname, direction);
+        }
+        String rname = sc.next();
+        tree.setRoot(rname);
+        tree.preorder();
+        tree.inorder();
+        tree.postorder();
+        sc.close();
+    }
+}
+
 class Node {
     int data;
     String name;
@@ -36,13 +61,13 @@ class Tree {
         this.root = null;
     }
     private Node searchByName(String name) {
-        for(Node n : this.node){
-            if(n.name.equals(name)) {
-                return n;
-            }
+        for (Node n : this.node) {
+          if (n != null && n.name.equals(name)) {
+            return n;
+          }
         }
         return null;
-    }
+      }
 
     public boolean addEdge(String pName, String cName,char direction) {
         Node pNode = searchByName(pName);
@@ -104,46 +129,4 @@ class Tree {
     }
 }
 
-public class Lab05_PlantingTree {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Read the number of nodes
-        int N = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline
-
-        // Create the tree
-        Tree tree = new Tree(N);
-
-        // Read node data
-        for (int i = 0; i < N; i++) {
-            String[] nodeData = scanner.nextLine().split(" ");
-            String name = nodeData[0];
-            int value = Integer.parseInt(nodeData[1]);
-            tree.node[i] = new Node(value, name);
-        }
-
-        // Read edges
-        for (int i = 0; i < N - 1; i++) {
-            String[] edgeData = scanner.nextLine().split(" ");
-            String parent = edgeData[0];
-            String child = edgeData[1];
-            char direction = edgeData[2].charAt(0);
-            tree.addEdge(parent, child, direction);
-        }
-
-        // Read the root node
-        String rootName = scanner.nextLine();
-        tree.setRoot(rootName);
-
-        // Perform traversals
-        tree.preorder();
-
-        tree.inorder();
-
-        tree.postorder();
-
-        scanner.close();
-    }
-}
 
