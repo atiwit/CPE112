@@ -1,3 +1,4 @@
+//67070501048 Atiwit
 package m2_w4;
 
 import java.util.*;
@@ -44,16 +45,50 @@ public abstract class Graph {
     }
 
     public int getInDegree(String name) {
-
+        int inDegree = 0;
+        for (List<Edge> edges : adjacencyList.values()) {
+            for (Edge edge : edges) {
+                if (edge.destination.equals(name)) {
+                    inDegree++;
+                }
+            }
+        }
+        return inDegree;
     }
 
+    // ยังไม่ทำ
     public int sumWeightOutDegree(String name) {
-        return adjacencyList.get(name).size();
+        if (!adjacencyList.containsKey(name)) {
+            return 0;
+        }
+        int sum = 0;
+        for (Edge edge : adjacencyList.get(name)) {
+            if (isWeighted) {
+                sum += edge.weight;
+            } else {
+                sum += 1;
+            }
+        }
+        return sum;
     }
 
+    // ยังไม่ทำ
     public int sumWeightInDegree(String name) {
-        return adjacencyList.get(name).size();
+        int sum = 0;
+        for (List<Edge> edges : adjacencyList.values()) {
+            for (Edge edge : edges) {
+                if (edge.destination.equals(name)) {
+                    if (isWeighted) {
+                        sum += edge.weight;
+                    } else {
+                        sum += 1;
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     protected abstract void addEdgeWithWeight(String source, String destination, int weight);
+
 }
