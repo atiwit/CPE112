@@ -2,8 +2,8 @@ package m3_week1;
 
 import java.util.*;
 
-public class myAlgorithm extends Algorithm {
-    public myAlgorithm() {
+public class MyAlgorithm extends Algorithm {
+    public MyAlgorithm() {
 
     }
 
